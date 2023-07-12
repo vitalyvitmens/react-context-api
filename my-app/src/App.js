@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
+// import { useState } from 'react'
+import { useEffect, useReducer } from 'react'
 import { Header, UserBlock } from './components'
 import styles from './app.module.css'
 import { AppContext } from './context'
-import { AppContextProvider } from './app-context-provider'
+// import { AppContextProvider } from './app-context-provider'
 
 const getUserFromServer = () => ({
 	id: 'a11100',
@@ -39,24 +40,28 @@ const reducer = (state, action) => {
 }
 
 export const App = () => {
-	const [userData, setUserData] = useState({})
+	// const [userData, setUserData] = useState({})
 
-	const dispatch = (action) => {
-		const newState = reducer(userData, action)
+	// const dispatch = (action) => {
+	// 	const newState = reducer(userData, action)
 
-		setUserData(newState)
-	}
+	// 	setUserData(newState)
+	// }
+	const [userData, dispatch] = useReducer(reducer, {})
 
 	useEffect(() => {
 		const userDataFromServer = getUserFromServer()
 
-		setUserData(userDataFromServer)
+		// setUserData(userDataFromServer)
+		dispatch({ type: 'SET_USER_DATA', payload: userDataFromServer})
+
 	}, [])
 
 	const onUserChange = () => {
 		const newUserDataFromServer = getAnotherUserFromServer()
 
-		setUserData(newUserDataFromServer)
+		// setUserData(newUserDataFromServer)
+		dispatch({ type: 'SET_USER_DATA', payload: newUserDataFromServer})
 	}
 
 	return (
