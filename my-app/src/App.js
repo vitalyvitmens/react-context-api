@@ -1,8 +1,11 @@
 // import { useState } from 'react'
-import { useEffect, useReducer } from 'react'
+// import { useEffect, useReducer } from 'react'
+import { useEffect, useState } from 'react'
 import { Header, UserBlock } from './components'
 import styles from './app.module.css'
-import { AppContext } from './context'
+// import { AppContext } from './context'
+import { store } from './store'
+import { appReducer } from './reducer'
 // import { AppContextProvider } from './app-context-provider'
 
 const getUserFromServer = () => ({
@@ -21,24 +24,6 @@ const getAnotherUserFromServer = () => ({
 	phone: '+375447777777',
 })
 
-const reducer = (state, action) => {
-	const { type, payload } = action
-
-	switch (type) {
-		case 'SET_USER_DATA': {
-			return payload
-		}
-		case 'SET_USER_AGE': {
-			return {
-				...state,
-				age: payload,
-			}
-		}
-		default:
-			return state
-	}
-}
-
 export const App = () => {
 	// const [userData, setUserData] = useState({})
 
@@ -47,32 +32,31 @@ export const App = () => {
 
 	// 	setUserData(newState)
 	// }
-	const [userData, dispatch] = useReducer(reducer, {})
+	// const [userData, dispatch] = useReducer(reducer, {})
 
 	useEffect(() => {
 		const userDataFromServer = getUserFromServer()
 
 		// setUserData(userDataFromServer)
-		dispatch({ type: 'SET_USER_DATA', payload: userDataFromServer})
-
+		store.dispatch({ type: 'SET_USER_DATA', payload: userDataFromServer })
 	}, [])
 
 	const onUserChange = () => {
 		const newUserDataFromServer = getAnotherUserFromServer()
 
 		// setUserData(newUserDataFromServer)
-		dispatch({ type: 'SET_USER_DATA', payload: newUserDataFromServer})
+		store.dispatch({ type: 'SET_USER_DATA', payload: newUserDataFromServer })
 	}
 
 	return (
-		<AppContext.Provider value={{ userData, dispatch }}>
+		// <AppContext.Provider value={{ userData, dispatch }}>
 			<div className={styles.app}>
 				<Header />
 				<hr />
 				<UserBlock />
 				<button onClick={onUserChange}>Сменить пользователя</button>
 			</div>
-		</AppContext.Provider>
+		// </AppContext.Provider>
 	)
 }
 
