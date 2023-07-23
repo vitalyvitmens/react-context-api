@@ -1,19 +1,13 @@
 // import { useContext } from 'react'
 // import { AppContext } from '../../../../context'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { store } from '../../../../store'
 
 export const UserPersonalInfo = () => {
 	// const { userData, dispatch } = useContext(AppContext)
 	// const { name, age, email, phone } = userData
-	useState(store.getState())
-	// useEffect(() => {
-	// 	store.subscribe(() => {
-	// 		store.getState()
-	// 	})
-	// }, [])
 
-	const { name, age } = store.getState()
+	const { name, age } = useState(store.getState())
 
 	const onUserUpdate = () => {
 		const { name, email, phone } = store.getState()

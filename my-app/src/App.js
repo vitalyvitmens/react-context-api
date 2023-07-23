@@ -34,6 +34,14 @@ export const App = () => {
 	// }
 	// const [userData, dispatch] = useReducer(reducer, {})
 
+	// useEffect(() => {
+	// 	store.subscribe(() => {
+	// 		store.getState()
+	// 	})
+	// }, [])
+
+	// const unsubscribe = store.subscribe()
+
 	useEffect(() => {
 		const userDataFromServer = getUserFromServer()
 
@@ -50,12 +58,12 @@ export const App = () => {
 
 	return (
 		// <AppContext.Provider value={{ userData, dispatch }}>
-			<div className={styles.app}>
-				<Header />
-				<hr />
-				<UserBlock />
-				<button onClick={onUserChange}>Сменить пользователя</button>
-			</div>
+		<div className={styles.app}>
+			<Header />
+			<hr />
+			<UserBlock />
+			<button onClick={onUserChange}>Сменить пользователя</button>
+		</div>
 		// </AppContext.Provider>
 	)
 }
