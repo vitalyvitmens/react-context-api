@@ -15,4 +15,9 @@ const createStore = (reducer) => {
 
 export const store = createStore(appReducer)
 
-store.dispatch({})
+store.dispatch({type: 'INIT' })
+// import { createStore } from 'redux';
+// import { appReducer, initialState } from './reducer';
+
+// export const store = createStore(appReducer, initialState);
+// store.dispatch({ type: 'INIT' });

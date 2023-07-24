@@ -4,8 +4,10 @@ import { useState } from 'react'
 import { store } from '../../../../store'
 
 export const UserContacts = () => {
+	const state = store.getState()
+	const { email, phone } = state
 	// const { email, phone } = useContext(AppContext)
-	const { email, phone } = useState(store.getState())
+
 	return (
 		<div>
 			<h3>Контакты:</h3>

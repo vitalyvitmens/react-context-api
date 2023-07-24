@@ -6,6 +6,7 @@ import styles from './app.module.css'
 // import { AppContext } from './context'
 import { store } from './store'
 import { appReducer } from './reducer'
+
 // import { AppContextProvider } from './app-context-provider'
 
 const getUserFromServer = () => ({
@@ -33,7 +34,14 @@ export const App = () => {
 	// 	setUserData(newState)
 	// }
 	// const [userData, dispatch] = useReducer(reducer, {})
+	const [state, setState] = useState(store.getState())
+	useEffect(() => {
+		const unsubscribe = store.subscribe(() => {
+			setState(store.getState())
+		})
 
+		return () => unsubscribe()
+	}, [])
 	// useEffect(() => {
 	// 	store.subscribe(() => {
 	// 		store.getState()
